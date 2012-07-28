@@ -16,6 +16,9 @@ chefvm()
     "default")
       __chefvm_default $1
       ;;
+    "create")
+      __chefvm_create $1
+      ;;
   esac
 }
 
@@ -47,6 +50,21 @@ __chefvm_default()
   ln -s $config $default_path
 
   echo "Default chef configuration set to: $config"
+}
+
+# I'm not sure how I want this to work yet.
+__chefvm_create()
+{
+  __chefvm_config $1
+
+  if [ -z "$1" ]; then
+    echo "No name provided"
+    return 1
+  fi
+
+  mkdir -p $root_dir/$config_path
+
+  echo "Created configuration: $config"
 }
 
 __chefvm_config()
