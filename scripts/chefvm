@@ -59,4 +59,11 @@ __chefvm_config()
   default_path="$root_dir/$configurations/default"
 }
 
+__chefvm_setup()
+{
+  __chefvm_config
+  [[ ! -e "$HOME/.chef" ]] && ln -s $current_path $HOME/.chef
+}
+
+__chefvm_setup
 chefvm use default > /dev/null
