@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+
+chefvm()
+{
+  if [ -z $1 ]; then
+    echo "USAGE: chefvm {use,default} CONFIG"
+  fi
+
+  command=$1
+  shift
+
+  case "$command" in
+    "use")
+      __chefvm_use $1
+      ;;
+    "default")
+      __chefvm_default $1
+      ;;
+  esac
+}
+
+__chefvm_use()
+{
+  __chefvm_config $1
+
+  if [[ "$1" == "default" ]] && [ ! -f $config_path ]; then
+    echo "No default config set"
+    return 1
+  fi
+
+  rm -f $current_path
+  ln -s $config_path $current_path
+
+  echo "Using chef config \"$config\""
+}
+
+__chefvm_default()
+{
+  __chefvm_config $1
+
+  if [ -z "$1" ]; then
+    echo "No config provided."
+    return 1
+  fi
+
+  rm -f $default_path
+  ln -s $config $default_path
+
+  echo "Default chef configuration set to: $config"
+}
+
+__chefvm_config()
+{
+  root_dir="$HOME/.chefvm"
+  configurations="configurations"
+  config=$1
+  config_path="$configurations/$config"
+  current_path="$root_dir/current"
+  default_path="$root_dir/$configurations/default"
+}
+
+chefvm use default > /dev/null
