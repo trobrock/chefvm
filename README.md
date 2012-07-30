@@ -18,5 +18,11 @@ Simple Chef environment manager, usage inspired by wayneeseguin/rvm
 
 Put the files (knife.rb, pem keys, etc...) that you would normally have in `~/.chef` into a folder named whatever you want in the configurations folder, then you can use that name in place of `YOUR_CHEF_CONFIG` in the below commands
 
+    # Use a specific config
     chefvm use {YOUR_CHEF_CONFIG|default}
+    # Set your default config
     chefvm default YOUR_CHEF_CONFIG
+    # Create a new config directory
+    chefvm create YOUR_CHEF_CONFIG
+    # Open a config directory in $EDITOR
+    chefvm edit YOUR_CHEF_CONFIG
