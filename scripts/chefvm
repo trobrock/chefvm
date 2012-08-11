@@ -98,16 +98,25 @@ __chefvm_list()
 __chefvm_set_config_from_current()
 {
   config=$(readlink $current_path | sed "s/$configurations\///")
+  default_config=$(readlink $default_path)
   for c in $(ls $root_dir/$configurations)
   do
-    if [[ "$c" == "$config" ]]; then
-      echo "* $c"
-    else
-      echo "  $c"
+    opts="  "
+    if [[ "$c" == "$config" && "$c" == "$default" ]]; then
+      opts="*="
+    elif [[ "$c" == "$config" ]]; then
+      opts="=>"
+    elif [[ "$c" == "$default" ]]; then
+      opts="* "
     fi
+
+    [[ "$c" != "default" ]] && echo "$opts $c"
   done
 
-  echo "\n* => - current"
+  echo "\n"
+  echo "=> - current"
+  echo "=* - current and default"
+  echo "*  - default"
 }
 
 __chefvm_config()
