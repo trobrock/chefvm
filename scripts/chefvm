@@ -92,11 +92,7 @@ __chefvm_edit()
 __chefvm_list()
 {
   __chefvm_config
-  __chefvm_set_config_from_current
-}
 
-__chefvm_set_config_from_current()
-{
   config=$(readlink $current_path | sed "s/$configurations\///")
   default_config=$(readlink $default_path)
   for c in $(ls $root_dir/$configurations)
