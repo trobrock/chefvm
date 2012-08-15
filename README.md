@@ -20,9 +20,18 @@ Put the files (knife.rb, pem keys, etc...) that you would normally have in `~/.c
 
     # Use a specific config
     chefvm use {YOUR_CHEF_CONFIG|default}
+
     # Set your default config
     chefvm default YOUR_CHEF_CONFIG
-    # Create a new config directory
+
+    # List your configurations, including current and default
+    chefvm list
+
+    # Create a new config
     chefvm create YOUR_CHEF_CONFIG
+
+    # Delete a config
+    chefvm delete YOUR_CHEF_CONFIG
+
     # Open a config directory in $EDITOR
     chefvm edit YOUR_CHEF_CONFIG
