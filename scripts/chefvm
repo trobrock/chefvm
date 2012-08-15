@@ -25,6 +25,9 @@ chefvm()
     "list")
       __chefvm_list
       ;;
+    "delete")
+      __chefvm_delete $1
+      ;;
   esac
 }
 
@@ -45,12 +48,12 @@ __chefvm_use()
 
 __chefvm_default()
 {
-  __chefvm_config $1
-
   if [ -z "$1" ]; then
     echo "No config provided."
     return 1
   fi
+
+  __chefvm_config $1
 
   rm -f $default_path
   ln -s $config $default_path
@@ -60,22 +63,46 @@ __chefvm_default()
 
 __chefvm_create()
 {
-  __chefvm_config $1
-
   if [ -z "$1" ]; then
     echo "No name provided"
     return 1
   fi
 
-  mkdir -p $root_dir/$config_path
-
-  echo "Created configuration: $config"
-}
-
-__chefvm_edit()
-{
   __chefvm_config $1
 
+  mkdir -p $root_dir/$config_path
+
+  echo "Creating configuration: $config"
+  __chefvm_use $config
+  echo "Copy your pem file to ~/.chef and run 'knife configure'"
+}
+
+__chefvm_delete()
+{
+  if [ -z "$1" ]; then
+    echo "No name provided"
+    return 1
+  fi
+
+  __chefvm_config $1
+
+  default_config=$(readlink $default_path)
+  if [[ "$default_config" == "$config" ]]; then
+    rm $default_path
+  fi
+
+  current_config=$(readlink $current_path | sed "s/$configurations\///")
+  if [[ "$current_config" == "$config" ]]; then
+    rm $current_path
+  fi
+
+  rm -rf $root_dir/$config_path
+
+  echo "Removed $config"
+}
+
+__chefvm_edit() 
+{
   if [ -z "$1" ]; then
     echo "No name provided"
     return 1
@@ -85,6 +112,8 @@ __chefvm_edit()
     echo "You must set \$EDITOR"
     return 1
   fi
+
+  __chefvm_config $1
 
   $EDITOR $root_dir/$config_path
 }
@@ -109,7 +138,7 @@ __chefvm_list()
     [[ "$c" != "default" ]] && echo "$opts $c"
   done
 
-  echo "\n"
+  echo
   echo "=> - current"
   echo "=* - current and default"
   echo "*  - default"
