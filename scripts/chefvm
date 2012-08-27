@@ -4,6 +4,7 @@ chefvm()
 {
   if [ -z $1 ]; then
     echo "USAGE: chefvm {use,default,create,edit} CONFIG"
+    exit 1
   fi
 
   command=$1
