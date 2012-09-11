@@ -2,32 +2,28 @@
 
 chefvm()
 {
-  if [ -z $1 ]; then
-    echo "USAGE: chefvm {use,default,create,edit} CONFIG"
-    exit 1
-  fi
-
   command=$1
-  shift
+  config=$2
+  [[ -z "$command" ]] && command="list"
 
   case "$command" in
     "use")
-      __chefvm_use $1
+      __chefvm_use $config
       ;;
     "default")
-      __chefvm_default $1
+      __chefvm_default $config
       ;;
     "create")
-      __chefvm_create $1
+      __chefvm_create $config
       ;;
     "edit")
-      __chefvm_edit $1
+      __chefvm_edit $config
       ;;
     "list")
       __chefvm_list
       ;;
     "delete")
-      __chefvm_delete $1
+      __chefvm_delete $config
       ;;
   esac
 }
