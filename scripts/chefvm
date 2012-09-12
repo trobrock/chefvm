@@ -25,6 +25,9 @@ chefvm()
     "delete")
       __chefvm_delete $config
       ;;
+    *)
+      __chefvm_use $command
+      ;;
   esac
 }
 
