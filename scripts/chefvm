@@ -35,9 +35,12 @@ __chefvm_use()
 {
   __chefvm_config $1
 
-  if [[ "$1" == "default" ]] && [ ! -f $config_path ]; then
+  if [[ "$1" == "default" ]] && [ ! -d "$root_dir/$config_path" ]; then
     echo "No default config set"
     return 1
+  elif [ ! -d "$root_dir/$config_path" ]; then
+    echo "Now configuration with that name was found"
+    return 2
   fi
 
   rm -f $current_path
