@@ -130,11 +130,11 @@ __chefvm_list()
   for c in $(ls $root_dir/$configurations)
   do
     opts="  "
-    if [[ "$c" == "$config" && "$c" == "$default" ]]; then
+    if [[ "$c" == "$config" && "$c" == "$default_config" ]]; then
       opts="*="
     elif [[ "$c" == "$config" ]]; then
       opts="=>"
-    elif [[ "$c" == "$default" ]]; then
+    elif [[ "$c" == "$default_config" ]]; then
       opts="* "
     fi
 
