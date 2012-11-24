@@ -35,3 +35,17 @@ Put the files (knife.rb, pem keys, etc...) that you would normally have in `~/.c
 
     # Open a config directory in $EDITOR
     chefvm edit YOUR_CHEF_CONFIG
+
+
+
+## Handy Prompt function
+You can use the following function in your .bashrc then call it in your $PS1 variable
+
+    function knife_config {
+      if [ -e ~/.chef ] ; then
+        echo $( cd -P ~/.chef ; basename $PWD )
+      fi
+    }
+
+    PS1="\$(knife_config)" $
+
