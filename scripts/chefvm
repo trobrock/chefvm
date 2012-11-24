@@ -52,8 +52,8 @@ __chefvm_use()
 __chefvm_default()
 {
   if [ -z "$1" ]; then
-    echo "No config provided."
-    return 1
+    __chefvm_use "default"
+    return
   fi
 
   __chefvm_config $1
@@ -125,7 +125,6 @@ __chefvm_list()
 {
   __chefvm_config
 
-  config=$(readlink $current_path | sed "s/$configurations\///")
   default_config=$(readlink $default_path)
   for c in $(ls $root_dir/$configurations)
   do
@@ -151,10 +150,19 @@ __chefvm_config()
 {
   root_dir="$HOME/.chefvm"
   configurations="configurations"
-  config=$1
-  config_path="$configurations/$config"
   current_path="$root_dir/current"
+
+  config=$1
+  if [[ -z "$config" ]]; then
+    config=$(readlink $current_path | sed "s/$configurations\///")
+  fi
+
   default_path="$root_dir/$configurations/default"
+  config_path="$configurations/$config"
+
+  if [[ "$config" == "default" ]]; then
+    config=$(readlink $default_path)
+  fi
 }
 
 __chefvm_setup()
