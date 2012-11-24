@@ -39,7 +39,7 @@ __chefvm_use()
     echo "No default config set"
     return 1
   elif [ ! -d "$root_dir/$config_path" ]; then
-    echo "Now configuration with that name was found"
+    echo "No configuration with that name was found"
     return 2
   fi
 
