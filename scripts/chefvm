@@ -4,6 +4,7 @@ chefvm()
 {
   command=$1
   config=$2
+  new_config=$3
   [[ -z "$command" ]] && command="list"
 
   case "$command" in
@@ -25,6 +26,9 @@ chefvm()
     "delete")
       __chefvm_delete $config
       ;;
+    "copy")
+      __chefvm_copy $config $new_config
+      ;; 
     *)
       __chefvm_use $command
       ;;
@@ -119,6 +123,31 @@ __chefvm_edit()
   __chefvm_config $1
 
   $EDITOR $root_dir/$config_path
+}
+
+__chefvm_copy()
+{
+  __chefvm_config $1
+
+  if [ -z "$config" ]; then
+    echo "No name provided"
+    return 1
+  fi
+
+  if [ ! -d $root_dir/$config_path ]; then
+    echo "No configuration named $1 found."
+    __chefvm_list
+    return 1
+  fi
+
+  if [ -z "$2" ]; then
+    echo "No destination name provided"
+    return 1
+  fi
+
+
+  echo "Copying: $config to $2" 
+  cp -R $root_dir/$config_path $root_dir/$configurations/$2
 }
 
 __chefvm_list()

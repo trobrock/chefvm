@@ -33,5 +33,9 @@ Put the files (knife.rb, pem keys, etc...) that you would normally have in `~/.c
     # Delete a config
     chefvm delete YOUR_CHEF_CONFIG
 
+    # Copy a config
+    chefvm copy SRC_CONFIG DEST_CONFIG
+
     # Open a config directory in $EDITOR
     chefvm edit YOUR_CHEF_CONFIG
+
