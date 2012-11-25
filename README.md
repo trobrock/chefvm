@@ -51,3 +51,6 @@ You can use the following function in your .bashrc then call it in your $PS1 var
 
     PS1="\$(knife_config)" $
 
+# Contributors
+
+Jesse Nelson [https://github.com/spheromak]
