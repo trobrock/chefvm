@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# Usage: chefvm list
+# Summary: List all the available chefvm configurations
+# Help: This command will show you all your available knife chef configurations
+
+set -e
+
+source $_CHEFVM_ROOT/share/chefvm/config.sh
+
+__chefvm_config
+
+default_config=$(readlink $default_path)
+for c in $(ls $root_dir/$configurations)
+do
+  opts="  "
+  if [[ "$c" == "$config" && "$c" == "$default_config" ]]; then
+    opts="*="
+  elif [[ "$c" == "$config" ]]; then
+    opts="=>"
+  elif [[ "$c" == "$default_config" ]]; then
+    opts="* "
+  fi
+
+  [[ "$c" != "default" ]] && echo "$opts $c"
+done
+
+echo
+echo "=> - current"
+echo "=* - current and default"
+echo "*  - default"

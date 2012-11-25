@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# Usage: chefvm copy CONFIG NEW_CONFIG
+# Summary: This will copy one chef configuration to a new name
+# Help: This command allows you to clone one configuration to a new name
+
+set -e
+
+source $_CHEFVM_ROOT/share/chefvm/config.sh
+
+__chefvm_config $1
+
+if [ -z "$config" ]; then
+  echo "No name provided"
+  exit 1
+fi
+
+if [ ! -d $root_dir/$config_path ]; then
+  echo "No configuration named $1 found."
+  __chefvm_list
+  exit 1
+fi
+
+if [ -z "$2" ]; then
+  echo "No destination name provided"
+  exit 1
+fi
+
+echo "Copying: $config to $2" 
+cp -R $root_dir/$config_path $root_dir/$configurations/$2
