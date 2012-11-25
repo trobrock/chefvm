@@ -35,6 +35,16 @@ chefvm()
   esac
 }
 
+__chefvm_commands()
+{
+  print "use" "default" "create" "edit" "list" "delete" "copy"
+}
+
+__chefvm_configs()
+{
+  print $(ls $root_dir/$configurations)
+}
+
 __chefvm_use()
 {
   __chefvm_config $1
