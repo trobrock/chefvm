@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# Usage: chefvm edit CONFIG
+# Summary: This will open the CONFIG directory in $EDITOR
+# Help: This command makes it easy to open up a config directory in your editor
+
+set -e
+
+source $_CHEFVM_ROOT/share/chefvm/config.sh
+
+if [ -z "$1" ]; then
+  echo "No name provided"
+  return 1
+fi
+
+if [ -z "$EDITOR" ]; then
+  echo "You must set \$EDITOR"
+  return 1
+fi
+
+__chefvm_config $1
+
+$EDITOR $root_dir/$config_path

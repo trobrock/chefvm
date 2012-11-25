@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# Usage: chefvm delete CONFIG
+# Summary: Delete a config from chefvm
+# Help: This command will delete a configuration from chefvm, this cannot be undone.
+
+set -e
+
+source $_CHEFVM_ROOT/share/chefvm/config.sh
+
+if [ -z "$1" ]; then
+  echo "No name provided"
+  return 1
+fi
+
+__chefvm_config $1
+
+default_config=$(readlink $default_path)
+if [[ "$default_config" == "$config" ]]; then
+  rm $default_path
+fi
+
+current_config=$(readlink $current_path | sed "s/$configurations\///")
+if [[ "$current_config" == "$config" ]]; then
+  rm $current_path
+fi
+
+rm -rf $root_dir/$config_path
+
+echo "Removed $config"

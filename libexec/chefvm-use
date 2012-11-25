@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# Usage: chefvm use CONFIG
+# Summary: Switch to the specified configuration
+# Help: This command will set your environment to use the specified chef configuration
+
+set -e
+
+source $_CHEFVM_ROOT/share/chefvm/config.sh
+
+__chefvm_config $1
+
+if [[ "$1" == "default" ]] && [ ! -d "$root_dir/$config_path" ]; then
+  echo "No default config set"
+  return 1
+elif [ ! -d "$root_dir/$config_path" ]; then
+  echo "No configuration with that name was found"
+  return 2
+fi
+
+rm -f $current_path
+ln -s $config_path $current_path
+
+echo "Using chef config \"$config\""

@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Usage: chefvm setup
+# Summary: Setup symlinks and put you in a config
+# Help: This command is for initial environment load
+
+set -e
+
+source $_CHEFVM_ROOT/share/chefvm/config.sh
+
+__chefvm_config
+[[ ! -e "$HOME/.chef" ]] && ln -s $current_path $HOME/.chef
+
+config=$(readlink $current_path | sed "s/$configurations\///")
+[[ -z "$config" ]] && __chefvm_use default > /dev/null
