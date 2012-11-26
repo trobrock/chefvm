@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Usage: chefvm default [CONFIG]
+# Summary: This will switch to your default configuration, or set it
+# Help: If you pass this command a config name, it will set your default to that config.
+#  If you don't pass a config it will switch you to your default.
+
+set -e
+
+source $_CHEFVM_ROOT/share/chefvm/config.sh
+
+if [ -z "$1" ]; then
+  __chefvm_use "default"
+  exit 0
+fi
+
+__chefvm_config $1
+
+rm -f $default_path
+ln -s $config $default_path
+
+echo "Default chef configuration set to: $config"
