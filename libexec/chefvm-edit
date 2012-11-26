@@ -9,12 +9,12 @@ source $_CHEFVM_ROOT/share/chefvm/config.sh
 
 if [ -z "$1" ]; then
   echo "No name provided"
-  return 1
+  exit 1
 fi
 
 if [ -z "$EDITOR" ]; then
   echo "You must set \$EDITOR"
-  return 1
+  exit 1
 fi
 
 __chefvm_config $1
