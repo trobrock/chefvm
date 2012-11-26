@@ -79,4 +79,5 @@ chefvm() {
     command chefvm "\$command" "\$@";;
   esac
 }
+chefvm setup
 EOS
