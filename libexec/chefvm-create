@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Usage: chefvm create CONFIG
+# Summary: Create a config in chefvm
+# Help: This command will create a chef configuration in chefvm, and switch to using it.
+
+set -e
+
+source $_CHEFVM_ROOT/share/chefvm/config.sh
+
+if [ -z "$1" ]; then
+  echo "No name provided"
+  exit 1
+fi
+
+__chefvm_config $1
+
+mkdir -p $root_dir/$config_path
+
+echo "Creating configuration: $config"
+__chefvm_use $config
+echo "Copy your pem file to ~/.chef and run 'knife configure'"

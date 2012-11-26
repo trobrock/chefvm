@@ -5,14 +5,8 @@ Simple Chef environment manager, usage inspired by wayneeseguin/rvm
 ## Installation
 
     git clone git://github.com/trobrock/chefvm.git ~/.chefvm
+    ~/.chefvm/bin/chefvm init # Follow these instructions
 
-### Bash
-
-    echo '[[ -s "$HOME/.chefvm/scripts/chefvm" ]] && . "$HOME/.chefvm/scripts/chefvm"' >> ~/.bash_profile
-
-### Zsh
-
-    echo '[[ -s "$HOME/.chefvm/scripts/chefvm" ]] && . "$HOME/.chefvm/scripts/chefvm"' >> ~/.zshenv
 
 ## Usage
 
@@ -41,15 +35,9 @@ Put the files (knife.rb, pem keys, etc...) that you would normally have in `~/.c
 
 
 ## Handy Prompt function
-You can use the following function in your .bashrc then call it in your $PS1 variable
+You can use `chefvm current` in PS1 in bash to see your current config in your prompt
 
-    function knife_config {
-      if [ -e ~/.chef ] ; then
-        echo $( cd -P ~/.chef ; basename $PWD )
-      fi
-    }
-
-    PS1="\$(knife_config)" $
+    PS1="\$(chefvm current)" $
 
 # Contributors
 

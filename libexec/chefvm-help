@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+set -e
+
+print_summaries() {
+  for file in $_CHEFVM_ROOT/libexec/chefvm-*; do
+    if [ ! -h $file ]; then
+      local summary=$(grep "^# Summary:" $file | cut -d ' ' -f3-)
+      if [ -n "$summary" ]; then
+        local name=$(basename $file | sed 's/chefvm-//')
+        echo "$name" | awk '{ printf "   %-20s   ", $1}'
+        echo -n $summary
+        echo
+      fi
+    fi
+  done
+}
+
+print_help() {
+  local usage=$(grep "^# Usage:" $1 | cut -d ' ' -f2-)
+  local halp="$(awk '/^# Help:/,/^[^#]/' $1 | grep "^#" | sed "s/^# Help: //" | sed "s/^# //" | sed "s/^#//")"
+
+  if [ -n "$usage" ]; then
+    echo $usage
+    [ -n "$halp" ] && echo && echo "$halp"
+  else
+    echo "Sorry, this command isn't documented yet."
+  fi
+}
+
+# Provide chefvm completions
+if [ "$1" = "--complete" ]; then
+  exec "chefvm-commands"
+  exit
+fi
+
+case "$1" in
+"") echo "Usage: chefvm <command> [<args>]
+
+Some useful chefvm commands are:
+$(print_summaries)
+
+See 'chefvm help <command>' for information on a specific command."
+;;
+*)
+  command_path="$(command -v "$_CHEFVM_ROOT/libexec/chefvm-$1" || true)"
+  if [ -n "$command_path" ]; then
+    print_help "$_CHEFVM_ROOT/libexec/chefvm-$1"
+  else
+    echo "chefvm: no such command \`$1'"
+  fi
+esac
