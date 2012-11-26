@@ -9,6 +9,11 @@ source $_CHEFVM_ROOT/share/chefvm/config.sh
 
 __chefvm_config $1
 
+# Provide chefvm completions
+if [ "$1" = "--complete" ]; then
+  exec ls $root_dir/$configurations
+fi
+
 if [[ "$1" == "default" ]] && [ ! -d "$root_dir/$config_path" ]; then
   echo "No default config set"
   return 1
