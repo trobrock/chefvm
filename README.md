@@ -5,14 +5,8 @@ Simple Chef environment manager, usage inspired by wayneeseguin/rvm
 ## Installation
 
     git clone git://github.com/trobrock/chefvm.git ~/.chefvm
+    ~/.chefvm/bin/chefvm init # Follow these instructions
 
-### Bash
-
-    echo '[[ -s "$HOME/.chefvm/scripts/chefvm" ]] && . "$HOME/.chefvm/scripts/chefvm"' >> ~/.bash_profile
-
-### Zsh
-
-    echo '[[ -s "$HOME/.chefvm/scripts/chefvm" ]] && . "$HOME/.chefvm/scripts/chefvm"' >> ~/.zshenv
 
 ## Usage
 
