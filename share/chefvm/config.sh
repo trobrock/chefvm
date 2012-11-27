@@ -2,16 +2,15 @@
 
 __chefvm_config()
 {
-  root_dir="$HOME/.chefvm"
   configurations="configurations"
-  current_path="$root_dir/current"
+  current_path="$_CHEFVM_ROOT/current"
 
   config=$1
   if [[ -z "$config" ]]; then
     config=$(readlink $current_path | sed "s/$configurations\///")
   fi
 
-  default_path="$root_dir/$configurations/default"
+  default_path="$_CHEFVM_ROOT/$configurations/default"
   config_path="$configurations/$config"
 
   if [[ "$config" == "default" ]]; then

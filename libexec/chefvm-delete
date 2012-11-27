@@ -24,6 +24,6 @@ if [[ "$current_config" == "$config" ]]; then
   rm $current_path
 fi
 
-rm -rf $root_dir/$config_path
+rm -rf $_CHEFVM_ROOT/$config_path
 
 echo "Removed $config"

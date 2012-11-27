@@ -19,4 +19,4 @@ fi
 
 __chefvm_config $1
 
-$EDITOR $root_dir/$config_path
+$EDITOR $_CHEFVM_ROOT/$config_path

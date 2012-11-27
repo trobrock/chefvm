@@ -11,13 +11,13 @@ __chefvm_config $1
 
 # Provide chefvm completions
 if [ "$1" = "--complete" ]; then
-  exec ls $root_dir/$configurations
+  exec ls $_CHEFVM_ROOT/$configurations
 fi
 
-if [[ "$1" == "default" ]] && [ ! -d "$root_dir/$config_path" ]; then
+if [[ "$1" == "default" ]] && [ ! -d "$_CHEFVM_ROOT/$config_path" ]; then
   echo "No default config set"
   exit 1
-elif [ ! -d "$root_dir/$config_path" ]; then
+elif [ ! -d "$_CHEFVM_ROOT/$config_path" ]; then
   echo "No configuration with that name was found"
   exit 2
 fi

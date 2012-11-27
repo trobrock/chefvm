@@ -14,7 +14,7 @@ fi
 
 __chefvm_config $1
 
-mkdir -p $root_dir/$config_path
+mkdir -p $_CHEFVM_ROOT/$config_path
 
 echo "Creating configuration: $config"
 __chefvm_use $config

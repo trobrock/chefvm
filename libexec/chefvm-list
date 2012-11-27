@@ -10,7 +10,7 @@ source $_CHEFVM_ROOT/share/chefvm/config.sh
 __chefvm_config
 
 default_config=$(readlink $default_path)
-for c in $(ls $root_dir/$configurations)
+for c in $(ls $_CHEFVM_ROOT/$configurations)
 do
   opts="  "
   if [[ "$c" == "$config" && "$c" == "$default_config" ]]; then

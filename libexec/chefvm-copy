@@ -14,7 +14,7 @@ if [ -z "$config" ]; then
   exit 1
 fi
 
-if [ ! -d $root_dir/$config_path ]; then
+if [ ! -d $_CHEFVM_ROOT/$config_path ]; then
   echo "No configuration named $1 found."
   __chefvm_list
   exit 1
@@ -26,4 +26,4 @@ if [ -z "$2" ]; then
 fi
 
 echo "Copying: $config to $2" 
-cp -R $root_dir/$config_path $root_dir/$configurations/$2
+cp -R $_CHEFVM_ROOT/$config_path $_CHEFVM_ROOT/$configurations/$2
