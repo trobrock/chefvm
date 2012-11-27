@@ -10,5 +10,11 @@ source $_CHEFVM_ROOT/share/chefvm/config.sh
 __chefvm_config
 [[ ! -e "$HOME/.chef" ]] && ln -s $current_path $HOME/.chef
 
+if [[ ! -e "$current_path" ]]; then
+  echo "[chefvm] Creating an example chef config and setting it to default"
+  chefvm create example > /dev/null
+  chefvm default example > /dev/null
+fi
+
 config=$(readlink $current_path | sed "s/$configurations\///")
 [[ -z "$config" ]] && chefvm use default > /dev/null
