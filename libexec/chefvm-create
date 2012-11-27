@@ -17,5 +17,5 @@ __chefvm_config $1
 mkdir -p $_CHEFVM_ROOT/$config_path
 
 echo "Creating configuration: $config"
-__chefvm_use $config
+chefvm use $config
 echo "Copy your pem file to ~/.chef and run 'knife configure'"

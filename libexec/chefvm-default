@@ -9,7 +9,7 @@ set -e
 source $_CHEFVM_ROOT/share/chefvm/config.sh
 
 if [ -z "$1" ]; then
-  __chefvm_use "default"
+  chefvm use "default"
   exit 0
 fi
 

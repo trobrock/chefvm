@@ -16,7 +16,7 @@ fi
 
 if [ ! -d $_CHEFVM_ROOT/$config_path ]; then
   echo "No configuration named $1 found."
-  __chefvm_list
+  chefvm list
   exit 1
 fi
 
