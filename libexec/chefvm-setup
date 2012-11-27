@@ -11,4 +11,4 @@ __chefvm_config
 [[ ! -e "$HOME/.chef" ]] && ln -s $current_path $HOME/.chef
 
 config=$(readlink $current_path | sed "s/$configurations\///")
-[[ -z "$config" ]] && __chefvm_use default > /dev/null
+[[ -z "$config" ]] && chefvm use default > /dev/null
