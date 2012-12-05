@@ -4,9 +4,15 @@ Simple Chef environment manager, usage inspired by wayneeseguin/rvm
 
 ## Installation
 
+    mv ~/.chef ~/.chef.bak
     git clone git://github.com/trobrock/chefvm.git ~/.chefvm
     ~/.chefvm/bin/chefvm init # Follow these instructions
+    
+After following these instructions reload your terminal, then
 
+    chefvm create old_config
+    mv ~/.chef.bak/* ~/.chefvm/configurations/old_config
+    rm -rf ~/.chef.bak
 
 ## Usage
 
