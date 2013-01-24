@@ -26,5 +26,5 @@ done
 
 echo
 echo "=> - current"
-echo "=* - current and default"
+echo "*= - current and default"
 echo "*  - default"
