@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Usage: chefvm update
+# Summary: This will update chefvm to the latest using git
+# Help: This command makes it easy to update chefvm to the latest version from trobrock/chefvm@master
+
+set -e
+
+source $_CHEFVM_ROOT/share/chefvm/config.sh
+
+__chefvm_config $1
+
+cd $_CHEFVM_ROOT
+git pull
