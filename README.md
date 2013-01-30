@@ -4,6 +4,7 @@ Simple Chef environment manager, usage inspired by wayneeseguin/rvm
 
 ## Installation
 
+    # Chefvm will create a symlink between (~/.chefvm -> ~/.chef ), make sure you have no ~/.chef directory before installing
     mv ~/.chef ~/.chef.bak
     git clone git://github.com/trobrock/chefvm.git ~/.chefvm
     ~/.chefvm/bin/chefvm init # Follow these instructions
