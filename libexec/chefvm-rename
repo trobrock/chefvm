@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# Usage: chefvm rename CONFIG NEW_CONFIG
+# Summary: This will rename a chef config to a new name
+# Help: This command allows you to rename a configuration
+
+set -e
+
+source $_CHEFVM_ROOT/share/chefvm/config.sh
+
+__chefvm_config $1
+
+if [ -z "$config" ]; then
+  echo "No name provided"
+  exit 1
+fi
+
+if [ ! -d $_CHEFVM_ROOT/$config_path ]; then
+  echo "No configuration named $1 found."
+  chefvm list
+  exit 1
+fi
+
+if [ -z "$2" ]; then
+  echo "No destination name provided"
+  exit 1
+fi
+
+echo "Renaming: $config to $2" 
+mv $_CHEFVM_ROOT/$config_path $_CHEFVM_ROOT/$configurations/$2
