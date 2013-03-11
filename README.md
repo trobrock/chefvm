@@ -21,6 +21,8 @@ Put the files (knife.rb, pem keys, etc...) that you would normally have in `~/.c
 
     # Use a specific config
     chefvm use {YOUR_CHEF_CONFIG|default}
+    # or
+    chefvm YOUR_CHEF_CONFIG
 
     # Set your default config
     chefvm default YOUR_CHEF_CONFIG
