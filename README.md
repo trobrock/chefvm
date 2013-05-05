@@ -1,5 +1,7 @@
 # ChefVM
 
+[![Build Status](https://travis-ci.org/trobrock/chefvm.png?branch=master)](https://travis-ci.org/trobrock/chefvm)
+
 Simple Chef environment manager, usage inspired by wayneeseguin/rvm
 
 ## Installation
