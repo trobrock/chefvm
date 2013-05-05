@@ -17,8 +17,8 @@ if [ ! -x "$HOME/.chefvm/bin/chefvm" ]; then
 fi
 eval "$(~/.chefvm/bin/chefvm init -)"
 
-if [ $TRAVIS ]; then
-  CODE_PATH="trobrock/chefvm"
+if [ $TRAVIS_BUILD_DIR ]; then
+  CODE_PATH=$TRAVIS_BUILD_DIR
 else
   CODE_PATH="/chefvm"
 fi
