@@ -9,7 +9,7 @@ fi
 if [ ! -x "$(which bats 2> /dev/null)" ]; then
   git clone https://github.com/sstephenson/bats.git
   cd bats
-  ./install.sh /usr/local
+  sudo ./install.sh /usr/local
 fi
 
 if [ ! -x "$HOME/.chefvm/bin/chefvm" ]; then
