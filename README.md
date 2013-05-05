@@ -54,6 +54,30 @@ You can use `chefvm current` in PS1 in bash to see your current config in your p
 
     PS1="\$(chefvm current)" $
 
+## Contributing
+
+Fork and send a pull request.
+
+# Running tests
+
+The following will bring up an ubuntu based vm, install chefvm, and run the bats tests against it.
+
+```shell
+vagrant up
+```
+
+While the vm is up you can run the following to re-run tests without rebuilding the vm.
+
+```shell
+vagrant provision
+```
+
+When you are done.
+
+```shell
+vagrant down
+```
+
 # Contributors
 
 Jesse Nelson [https://github.com/spheromak]
