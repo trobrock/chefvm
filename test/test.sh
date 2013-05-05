@@ -17,4 +17,9 @@ if [ ! -x "$HOME/.chefvm/bin/chefvm" ]; then
 fi
 eval "$(~/.chefvm/bin/chefvm init -)"
 
-bats /chefvm/test/*.bats
+if [ $TRAVIS ]; then
+  CODE_PATH="trobrock/chefvm"
+else
+  CODE_PATH="/chefvm"
+fi
+bats $CODE_PATH/test/*.bats
