@@ -2,3 +2,4 @@ configurations
 *.sw*
 current
 *.un~
+.vagrant
