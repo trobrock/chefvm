@@ -1,1 +1,1 @@
-script: "test/test.sh"
+script: "./test/test.sh"
