@@ -13,8 +13,15 @@ tag="$( git describe --tags )"
 diff="$( git cherry -v $tag HEAD | wc -l )"
 
 if [ "$diff" -eq 0 ]; then
-  echo "Already up to date"
+  echo "Already up to date."
 else
-  git reset --hard $tag
-  echo "Updated to $tag"
+  echo "Update to version: $tag? (Y/n)"
+  read cont
+
+  if [ ! "$cont" == "n" ]; then
+    git reset --hard $tag
+    echo "Updated to $tag!"
+  else
+    echo "Not updating right now."
+  fi
 fi
