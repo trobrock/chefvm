@@ -5,8 +5,6 @@
 
 set -e
 
-source $_CHEFVM_ROOT/share/chefvm/config.sh
-
 __chefvm_config
 [[ ! -e "$HOME/.chef" && ! -L "$HOME/.chef" ]] && ln -s $current_path $HOME/.chef
 

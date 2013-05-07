@@ -6,8 +6,6 @@
 
 set -e
 
-source $_CHEFVM_ROOT/share/chefvm/config.sh
-
 if [ -z "$1" ]; then
   chefvm use "default"
   exit 0
