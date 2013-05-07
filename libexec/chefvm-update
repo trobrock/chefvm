@@ -8,4 +8,13 @@ set -e
 __chefvm_config $1
 
 cd $_CHEFVM_ROOT
-git pull
+git fetch origin
+tag="$( git describe --tags )"
+diff="$( git cherry -v $tag HEAD | wc -l )"
+
+if [ "$diff" -eq 0 ]; then
+  echo "Already up to date"
+else
+  git reset --hard $tag
+  echo "Updated to $tag"
+fi
