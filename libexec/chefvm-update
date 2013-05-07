@@ -9,8 +9,8 @@ __chefvm_config $1
 
 cd $_CHEFVM_ROOT
 git fetch origin
-tag="$( git describe --tags )"
-diff="$( git cherry -v $tag HEAD | wc -l )"
+tag="$( git describe --tags --abbrev=0 `git rev-list --tags --max-count=1` )"
+diff="$( git cherry -v HEAD $tag | wc -l )"
 
 if [ "$diff" -eq 0 ]; then
   echo "Already up to date."
