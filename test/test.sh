@@ -22,4 +22,4 @@ if [ $TRAVIS_BUILD_DIR ]; then
 else
   CODE_PATH="/chefvm"
 fi
-bats $CODE_PATH/test/*.bats
+bats $CODE_PATH/test
