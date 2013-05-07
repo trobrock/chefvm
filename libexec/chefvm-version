@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Usage: chefvm version
+# Summary: Show the current versin of chefvm
+# Help: This command will show the currently installed version of chefvm
+
+set -e
+
+echo $_CHEFVM_VERSION

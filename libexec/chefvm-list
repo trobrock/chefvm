@@ -5,8 +5,6 @@
 
 set -e
 
-source $_CHEFVM_ROOT/share/chefvm/config.sh
-
 __chefvm_config
 
 default_config=$(readlink $default_path)

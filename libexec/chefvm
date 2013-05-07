@@ -23,6 +23,10 @@ libexec_path="$(abs_dirname "$0")"
 export _CHEFVM_ROOT="$(abs_dirname "$libexec_path")"
 export PATH="${libexec_path}:$PATH"
 
+# Include shared files
+source $_CHEFVM_ROOT/share/chefvm/version.sh
+source $_CHEFVM_ROOT/share/chefvm/config.sh
+
 command="$1"
 case "$command" in
 "" | "-h" | "--help" )
