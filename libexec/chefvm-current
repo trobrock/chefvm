@@ -4,8 +4,6 @@
 
 set -e
 
-source $_CHEFVM_ROOT/share/chefvm/config.sh
-
 __chefvm_config $1
 
 echo $config

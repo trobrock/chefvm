@@ -5,8 +5,6 @@
 
 set -e
 
-source $_CHEFVM_ROOT/share/chefvm/config.sh
-
 if [ -z "$1" ]; then
   echo "No name provided"
   exit 1

@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+source ./share/chefvm/version.sh
+version="v$_CHEFVM_VERSION"
+
+git fetch origin
+
+if [ "$( git tag -l | grep "$version" )" ]; then
+  echo "Version $version already pushed"
+else
+  git tag $version
+  git push origin $version:$version
+fi

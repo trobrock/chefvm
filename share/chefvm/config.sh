@@ -17,3 +17,4 @@ __chefvm_config()
     config=$(readlink $default_path)
   fi
 }
+export -f __chefvm_config
