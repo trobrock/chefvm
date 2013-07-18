@@ -7,7 +7,7 @@ set -e
 
 __chefvm_config
 
-default_config=$(readlink $default_path)
+default_config=$(readlink $default_path) || true
 for c in $(ls $_CHEFVM_ROOT/$configurations)
 do
   opts="  "
