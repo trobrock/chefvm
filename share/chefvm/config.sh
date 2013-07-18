@@ -16,5 +16,7 @@ __chefvm_config()
   if [[ "$config" == "default" ]]; then
     config=$(readlink $default_path)
   fi
+
+  return 0
 }
 export -f __chefvm_config
