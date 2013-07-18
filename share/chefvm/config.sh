@@ -14,7 +14,7 @@ __chefvm_config()
   config_path="$configurations/$config"
 
   if [[ "$config" == "default" ]]; then
-    config=$(readlink $default_path)
+    config=$(readlink $default_path) || true
   fi
 
   return 0

@@ -12,7 +12,7 @@ fi
 
 __chefvm_config $1
 
-default_config=$(readlink $default_path)
+default_config=$(readlink $default_path) || true
 if [[ "$default_config" == "$config" ]]; then
   rm $default_path
 fi
