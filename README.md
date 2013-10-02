@@ -83,3 +83,7 @@ vagrant down
 # Contributors
 
 Jesse Nelson [https://github.com/spheromak]
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/trobrock/chefvm/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
