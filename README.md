@@ -1,6 +1,7 @@
 # ChefVM
 
 [![Build Status](https://travis-ci.org/trobrock/chefvm.png?branch=master)](https://travis-ci.org/trobrock/chefvm)
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/trobrock/chefvm/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
 Simple Chef environment manager, usage inspired by wayneeseguin/rvm
 
@@ -83,7 +84,3 @@ vagrant down
 # Contributors
 
 Jesse Nelson [https://github.com/spheromak]
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/trobrock/chefvm/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
