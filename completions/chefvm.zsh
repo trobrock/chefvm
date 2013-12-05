@@ -10,7 +10,7 @@ _chefvm() {
   word="${words[2]}"
 
   if [ "${#words}" -eq 2 ]; then
-    completions="$(chefvm commands)"
+    completions="$(chefvm commands) $(chefvm completions use)"
   else
     completions="$(chefvm completions "${word}")"
   fi
