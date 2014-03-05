@@ -1,1 +1,4 @@
 script: "./test/test.sh"
+env:
+  - TEST_SHELL=bash
+  - TEST_SHELL=fish

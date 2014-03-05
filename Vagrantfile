@@ -7,5 +7,14 @@ Vagrant.configure("2") do |config|
 
   config.vm.synced_folder "./", "/root/.chefvm"
 
-  config.vm.provision :shell, path: "test/test.sh"
+  config.vm.define "bash" do |bash|
+    bash.vm.provision :shell, path: "test/test.sh"
+  end
+
+  config.vm.define "fish" do |fish|
+    fish.vm.provision :shell do |s|
+      s.path = "test/test.sh"
+      s.args = "fish"
+    end
+  end
 end
