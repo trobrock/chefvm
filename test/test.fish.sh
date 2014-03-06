@@ -10,6 +10,7 @@ function chefvm_init
   eval $CODE_PATH/bin/chefvm init -
 end
 
+echo $PATH
 eval (chefvm_init)
 
 bats $CODE_PATH/test
