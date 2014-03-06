@@ -92,6 +92,7 @@ function chefvm
       command chefvm "\$command" "\$argv"
   end
 end';
+eval 'chefvm setup';
 EOS
   ;;
 * )
