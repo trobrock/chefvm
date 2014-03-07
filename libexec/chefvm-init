@@ -6,10 +6,12 @@ if [ "$1" = "-" ]; then
   print=1
   shift
 fi
-
 shell="$1"
 if [ -z "$shell" ]; then
-  shell="$(basename "$SHELL")"
+  shell="$(ps c -p "$PPID" -o 'ucomm=' 2>/dev/null || true)"
+  shell="${shell##-}"
+  shell="${shell%% *}"
+  shell="$(basename "${shell:-$SHELL}")"
 fi
 
 resolve_link() {
@@ -55,7 +57,15 @@ if [ -z "$print" ]; then
   exit 1
 fi
 
-echo "export PATH=\"\${PATH}:${_CHEFVM_ROOT}/bin\""
+bin_path="${_CHEFVM_ROOT}/bin"
+case "$shell" in
+fish )
+  echo "eval 'set -x PATH \$PATH \"$bin_path\"';"
+  ;;
+* )
+  echo "export PATH=\"\$PATH:$bin_path\""
+  ;;
+esac
 
 case "$shell" in
 bash | zsh )
@@ -65,7 +75,28 @@ esac
 
 commands=(`chefvm commands --sh`)
 IFS="|"
-cat <<EOS
+case "$shell" in
+fish )
+  cat <<EOS
+  eval '
+function chefvm
+  set command "\$1"
+  if test [ "\$argv" -gt 0 ]
+    shift
+  end
+
+  switch "\$command"
+    case ${commands[*]}
+      eval \`chefvm "sh-\$command" "\$argv"\`
+    case '*'
+      command chefvm "\$command" "\$argv"
+  end
+end';
+eval 'chefvm setup';
+EOS
+  ;;
+* )
+  cat <<EOS
 chefvm() {
   local command="\$1"
   if [ "\$#" -gt 0 ]; then
@@ -81,3 +112,5 @@ chefvm() {
 }
 chefvm setup
 EOS
+  ;;
+esac

@@ -1,15 +1,24 @@
 #!/usr/bin/env bash
 
-# This is for bootstrapping and run tests on the vm
+shell=${1:-"$TEST_SHELL"}
+shell=${shell:-"bash"}
 
 if [ ! -x "$(which git 2> /dev/null)" ]; then
+  echo "[setup] Installing git"
   sudo apt-get install -y git-core
 fi
 
 if [ ! -x "$(which bats 2> /dev/null)" ]; then
+  echo "[setup] Installing bats"
   git clone https://github.com/sstephenson/bats.git
-  cd bats
+  pushd bats
   sudo ./install.sh /usr/local
+  popd
+fi
+
+if [ "$shell" == "fish" ] && [ ! -x "$(which fish 2> /dev/null)" ]; then
+  echo "[setup] Installing fish"
+  sudo apt-get install -y fish
 fi
 
 if [ $TRAVIS_BUILD_DIR ]; then
@@ -18,6 +27,5 @@ else
   CODE_PATH="$HOME/.chefvm"
 fi
 
-eval "$($CODE_PATH/bin/chefvm init -)"
-
-bats $CODE_PATH/test
+echo "[setup] Running tests"
+exec $CODE_PATH/test/test.$shell.sh
