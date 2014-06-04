@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+# Usage: chefvm import FILE CONFIG_NAME
+# Summary: Import a configuration
+# Help: This command will import a file that was exported from chefvm to a new configuration.
+
+set -e
+
+file=$(readlink -f $1)
+if [ -z "$file" ] || [ ! -f "$file" ]; then
+  echo "$file does not exist"
+  exit 1
+fi
+
+if [ -z "$2" ]; then
+  echo "No new config name specified"
+  exit 1
+fi
+
+__chefvm_config $2
+
+echo "Importing '$1' as '$2'"
+
+mkdir -p $_CHEFVM_ROOT/$config_path
+pushd $_CHEFVM_ROOT/$config_path > /dev/null
+tar xzf $file
+popd > /dev/null

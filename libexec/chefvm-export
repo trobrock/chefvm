@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+# Usage: chefvm export CONFIG [--include-keys]
+# Summary: Export a configuration, ignoring key files (unless specified)
+# Help: This command will export a configuration to a file so it can be imported on another machine.
+
+set -e
+
+__chefvm_config $1
+
+if [ -z "$config" ]; then
+  echo "No name provided"
+  exit 1
+fi
+
+if [ ! -d $_CHEFVM_ROOT/$config_path ]; then
+  echo "No configuration named $1 found."
+  chefvm list
+  exit 1
+fi
+
+if [ "$2" = "--include-keys" ]; then
+  include_keys=1
+fi
+
+echo "Exporting: $config"
+
+pushd $_CHEFVM_ROOT/$config_path > /dev/null
+export_file="$_CHEFVM_ROOT/exports/${config}.tar.gz"
+rm -f $export_file
+
+if [ "$include_keys" = "1" ]; then
+  tar czf $export_file ./
+else
+  tar czf $export_file --exclude '*.pem' ./
+fi
+
+popd > /dev/null
