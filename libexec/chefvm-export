@@ -18,9 +18,20 @@ if [ ! -d $_CHEFVM_ROOT/$config_path ]; then
   exit 1
 fi
 
+if [ "$2" = "--include-keys" ]; then
+  include_keys=1
+fi
+
 echo "Exporting: $config"
+
 pushd $_CHEFVM_ROOT/$config_path > /dev/null
 export_file="$_CHEFVM_ROOT/exports/${config}.tar.gz"
 rm -f $export_file
-tar czf $export_file --exclude '*.pem' ./
+
+if [ "$include_keys" = "1" ]; then
+  tar czf $export_file ./
+else
+  tar czf $export_file --exclude '*.pem' ./
+fi
+
 popd > /dev/null

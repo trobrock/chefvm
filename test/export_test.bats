@@ -1,9 +1,9 @@
 #!/usr/bin/env bats
 
 setup() {
-  touch $chefvm_root/configurations/example/knife.rb
-  touch $chefvm_root/configurations/example/myuser.pem
-  touch $chefvm_root/configurations/example/myvalidator.pem
+  touch $(chefvm prefix)/configurations/example/knife.rb
+  touch $(chefvm prefix)/configurations/example/myuser.pem
+  touch $(chefvm prefix)/configurations/example/myvalidator.pem
 }
 
 @test "should have the exports directory" {
@@ -36,6 +36,26 @@ setup() {
   [ -f "knife.rb" ]
   [ ! -f "myuser.pem" ]
   [ ! -f "myvalidator.pem" ]
+
+  popd > /dev/null
+  rm -rf $tempfile
+}
+
+@test "should be able to include key files" {
+  chefvm_root=$(chefvm prefix)
+  run chefvm export example --include-keys
+
+  [ "$status" -eq 0 ]
+
+  tempfile=$(mktemp -t chefvm-export-ignore-keys.XXXXXXXXXX)
+  rm $tempfile
+  mkdir -p $tempfile
+  pushd $tempfile > /dev/null
+  tar xzf $chefvm_root/exports/example.tar.gz
+
+  [ -f "knife.rb" ]
+  [ -f "myuser.pem" ]
+  [ -f "myvalidator.pem" ]
 
   popd > /dev/null
   rm -rf $tempfile
