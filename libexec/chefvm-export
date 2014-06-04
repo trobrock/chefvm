@@ -19,6 +19,8 @@ if [ ! -d $_CHEFVM_ROOT/$config_path ]; then
 fi
 
 echo "Exporting: $config"
-pushd $_CHEFVM_ROOT > /dev/null
-tar czf $_CHEFVM_ROOT/exports/${config}.tar.gz $config_path
+pushd $_CHEFVM_ROOT/$config_path > /dev/null
+export_file="$_CHEFVM_ROOT/exports/${config}.tar.gz"
+rm -f $export_file
+tar czf $export_file --exclude '*.pem' ./
 popd > /dev/null
