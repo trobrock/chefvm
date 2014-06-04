@@ -8,7 +8,7 @@ set -e
 __chefvm_config $1
 
 cd $_CHEFVM_ROOT
-git fetch origin
+git fetch --tags origin
 tag="$( git describe --tags --abbrev=0 `git rev-list --tags --max-count=1` )"
 diff="$( git cherry -v HEAD $tag | wc -l )"
 
