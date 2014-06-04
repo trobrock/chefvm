@@ -3,3 +3,4 @@ configurations
 current
 *.un~
 .vagrant
+exports/
