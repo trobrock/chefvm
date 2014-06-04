@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Usage: chefvm export CONFIG
-# Summary: Export a configuration
+# Usage: chefvm export CONFIG [--include-keys]
+# Summary: Export a configuration, ignoring key files (unless specified)
 # Help: This command will export a configuration to a file so it can be imported on another machine.
 
 set -e
