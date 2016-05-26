@@ -88,8 +88,8 @@ function chefvm
   switch "\$command"
     case ${commands[*]}
       eval \`chefvm "sh-\$command" "\$argv"\`
-    case '*'
-      command chefvm "\$command" "\$argv"
+    case "*"
+      command chefvm "\$command" "\$argv";
   end
 end';
 eval 'chefvm setup';
